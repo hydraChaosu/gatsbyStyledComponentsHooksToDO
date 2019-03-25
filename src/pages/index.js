@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import AddTodo from "../components/AddTodo"
 import TodoItem from "../components/TodoItem"
-import TodoListCompl from "../components/TodoListCompl"
+import TodoItemCompl from "../components/TodoItemCompl"
 
 const Container = styled.div`
   margin: 3rem auto;
@@ -67,21 +67,34 @@ export default () => {
         <ul>
           {todos.map(item => {
             return (
-              <TodoItem
-                key={item.id}
-                item={item}
-                handleComplete={handleComplete}
-                handleRemove={handleRemove}
-              />
+              <>
+                {!item.completed ? (
+                  <TodoItem
+                    key={item.id}
+                    item={item}
+                    handleComplete={handleComplete}
+                    handleRemove={handleRemove}
+                  />
+                ) : null}
+              </>
             )
           })}
         </ul>
-        {/* <TodoList
-          todos={[...todos]}
-          handleComplete={handleComplete}
-          handleRemove={handleRemove}
-        /> */}
-        {/* <TodoListCompl todos={"a"} handleRemove={handleRemove} /> */}
+        <ul>
+          {todos.map(item => {
+            return (
+              <>
+                {item.completed ? (
+                  <TodoItemCompl
+                    key={item.id}
+                    item={item}
+                    handleRemove={handleRemove}
+                  />
+                ) : null}
+              </>
+            )
+          })}
+        </ul>
       </Container>
     </>
   )
