@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import AddTodo from "../components/AddTodo"
+import TodoItem from "../components/TodoItem"
+import TodoListCompl from "../components/TodoListCompl"
 
 const Container = styled.div`
   margin: 3rem auto;
@@ -65,22 +67,21 @@ export default () => {
         <ul>
           {todos.map(item => {
             return (
-              <>
-                <li key={item.id}>
-                  {item.title}
-                  {item.completed ? null : (
-                    <button id={item.id} onClick={handleComplete}>
-                      complete todo
-                    </button>
-                  )}
-                  <button id={item.id} onClick={handleRemove}>
-                    remove todo
-                  </button>
-                </li>
-              </>
+              <TodoItem
+                key={item.id}
+                item={item}
+                handleComplete={handleComplete}
+                handleRemove={handleRemove}
+              />
             )
           })}
         </ul>
+        {/* <TodoList
+          todos={[...todos]}
+          handleComplete={handleComplete}
+          handleRemove={handleRemove}
+        /> */}
+        {/* <TodoListCompl todos={"a"} handleRemove={handleRemove} /> */}
       </Container>
     </>
   )
