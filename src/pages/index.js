@@ -42,7 +42,7 @@ export default () => {
     const TodoCopy = [...todos]
     const result = TodoCopy.filter(item => {
       if (item.id == value) {
-        item.completed = true
+        item.completed = !item.completed
       }
       return item
     })
@@ -88,6 +88,7 @@ export default () => {
                   <TodoItemCompl
                     key={item.id}
                     item={item}
+                    handleComplete={handleComplete}
                     handleRemove={handleRemove}
                   />
                 ) : null}
@@ -99,10 +100,7 @@ export default () => {
     </>
   )
 }
-// Add to do do nowego komponenetu completed
-// TodoLista do innego
-// Todocompleted do innego
-// remove and complete todo completed
+
 // podbierz to do
 
 // where can be hooks

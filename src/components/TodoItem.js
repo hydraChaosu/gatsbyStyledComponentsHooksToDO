@@ -4,11 +4,11 @@ const TodoItem = ({ item, handleComplete, handleRemove }) => {
   return (
     <li key={item.id}>
       {item.title}
-      {item.completed ? null : (
-        <button id={item.id} onClick={handleComplete}>
-          complete todo
-        </button>
-      )}
+
+      <button id={item.id} onClick={handleComplete}>
+        complete todo
+      </button>
+
       <button id={item.id} onClick={handleRemove}>
         remove todo
       </button>
@@ -17,3 +17,9 @@ const TodoItem = ({ item, handleComplete, handleRemove }) => {
 }
 
 export default TodoItem
+
+// {item.completed ? null : (
+//   <button id={item.id} onClick={handleComplete}>
+//     complete todo
+//   </button>
+// )}
