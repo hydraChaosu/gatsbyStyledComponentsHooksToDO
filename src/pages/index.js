@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
+import AddTodo from "../components/AddTodo"
 
 const Container = styled.div`
   margin: 3rem auto;
@@ -12,24 +13,11 @@ const Container = styled.div`
 `
 
 export default () => {
-  const [count, setCount] = useState(0)
-  const [id, setId] = useState(0)
+  const [id, setId] = useState(1)
   const [text, setText] = useState("")
   const [todos, setTodos] = useState([
     { userId: 0, id: 0, title: "itemek", completed: false },
   ])
-  // // let todolist = []
-  // useEffect(() => {
-  //   let todoList = [...todos].map(item => (
-  //     <li id={item.id} key={item.id}>
-  //       {item.title}
-  //       <button id={item.id}>Remove todo</button>
-  //       <button id={item.id} onClick={() => setTodos((item.completed = true))}>
-  //         Complete to do
-  //       </button>
-  //     </li>
-  //   ))
-  // }, [todos])
 
   useEffect(() => {
     console.log(text)
@@ -38,33 +26,77 @@ export default () => {
   useEffect(() => {
     console.log(todos)
   }, [todos])
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    setId(id + 1)
+    setTodos([...todos, { userId: id, id: id, title: text, completed: false }])
+    setText("")
+  }
+
+  const handleComplete = e => {
+    e.preventDefault()
+    const value = e.target.id
+    const TodoCopy = [...todos]
+    const result = TodoCopy.filter(item => {
+      if (item.id == value) {
+        item.completed = true
+      }
+      return item
+    })
+    setTodos(result)
+  }
+
+  const handleRemove = e => {
+    e.preventDefault()
+    const value = e.target.id
+    const TodoCopy = [...todos]
+    const result = TodoCopy.filter(item => {
+      if (item.id != value) {
+        return item
+      }
+    })
+    setTodos(result)
+  }
   return (
     <>
       <Container>
-        <h1>Kotek</h1>
-        <p>{count}</p>
-        <button onClick={() => setCount(count + 1)}>+</button>
-        <form
-          onSubmit={e => {
-            // const prevTodos = [...todos]
-            e.preventDefault()
-            setId(id + 1)
-            setTodos([
-              ...todos,
-              { userId: id, id: id, title: text, completed: false },
-            ])
-            setText("")
-          }}
-        >
-          <input
-            type="text"
-            onChange={e => setText(e.target.value)}
-            value={text}
-          />
-          <button>Add to do</button>
-        </form>
-        {/* <ul>{todoList}</ul> */}
+        <AddTodo handleSubmit={handleSubmit} text={text} setText={setText} />
+        <ul>
+          {todos.map(item => {
+            return (
+              <>
+                <li key={item.id}>
+                  {item.title}
+                  {item.completed ? null : (
+                    <button id={item.id} onClick={handleComplete}>
+                      complete todo
+                    </button>
+                  )}
+                  <button id={item.id} onClick={handleRemove}>
+                    remove todo
+                  </button>
+                </li>
+              </>
+            )
+          })}
+        </ul>
       </Container>
     </>
   )
 }
+// Add to do do nowego komponenetu completed
+// TodoLista do innego
+// Todocompleted do innego
+// remove and complete todo completed
+// podbierz to do
+
+// where can be hooks
+// <form onSubmit={handleSubmit}>
+// <input
+//   type="text"
+//   onChange={e => setText(e.target.value)}
+//   value={text}
+// />
+// <button>Add to do</button>
+// </form>
