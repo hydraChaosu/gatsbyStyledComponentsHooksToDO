@@ -3,6 +3,7 @@ import styled from "styled-components"
 import AddTodo from "../components/AddTodo"
 import TodoItem from "../components/TodoItem"
 import TodoItemCompl from "../components/TodoItemCompl"
+import axios from "axios"
 
 const Container = styled.div`
   margin: 3rem auto;
@@ -28,6 +29,15 @@ export default () => {
   useEffect(() => {
     console.log(todos)
   }, [todos])
+
+  useEffect(async () => {
+    const result = await axios("https://jsonplaceholder.typicode.com/todos")
+    // console.log("mounted")
+    // console.log(result.data.slice(0, 10))
+    // dobre setTodos([...todos].concat(result.data.slice(0, 10)))
+    // zle setTodos([...todos, result.data.slice(0,10)])
+    setTodos([...todos].concat(result.data.slice(0, 10)))
+  }, [])
 
   const handleSubmit = e => {
     e.preventDefault()
