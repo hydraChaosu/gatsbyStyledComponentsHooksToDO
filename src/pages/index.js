@@ -4,19 +4,30 @@ import AddTodo from "../components/AddTodo"
 import TodoItem from "../components/TodoItem"
 import TodoItemCompl from "../components/TodoItemCompl"
 import axios from "axios"
+import "../styles/styles.css"
 
 const Container = styled.div`
-  margin: 3rem auto;
-  max-width: 1400px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background-color: red;
+  align-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+`
+const AddTodoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-basis: 20%;
+`
+
+const TodoContainer = styled.div`
+  flex-grow: 1;
+  min-width: 80%;
 `
 
 export default () => {
-  const [id, setId] = useState(1)
+  const [id, setId] = useState(11)
   const [text, setText] = useState("")
   const [todos, setTodos] = useState([
     { userId: 0, id: 0, title: "itemek", completed: false },
@@ -29,7 +40,7 @@ export default () => {
   useEffect(() => {
     console.log(todos)
   }, [todos])
-
+  // puste nawiasy za efektem dzialaja jak component did mount/unmount
   useEffect(async () => {
     const result = await axios("https://jsonplaceholder.typicode.com/todos")
     // console.log("mounted")
@@ -73,39 +84,46 @@ export default () => {
   return (
     <>
       <Container>
-        <AddTodo handleSubmit={handleSubmit} text={text} setText={setText} />
-        <ul>
-          {todos.map(item => {
-            return (
-              <>
-                {!item.completed ? (
-                  <TodoItem
-                    key={item.id}
-                    item={item}
-                    handleComplete={handleComplete}
-                    handleRemove={handleRemove}
-                  />
-                ) : null}
-              </>
-            )
-          })}
-        </ul>
-        <ul>
-          {todos.map(item => {
-            return (
-              <>
-                {item.completed ? (
-                  <TodoItemCompl
-                    key={item.id}
-                    item={item}
-                    handleComplete={handleComplete}
-                    handleRemove={handleRemove}
-                  />
-                ) : null}
-              </>
-            )
-          })}
-        </ul>
+        <AddTodoContainer className="addTodoContainer">
+          <h1>Add Todo</h1>
+          <AddTodo handleSubmit={handleSubmit} text={text} setText={setText} />
+        </AddTodoContainer>
+        <TodoContainer className="todoContainer">
+          <h2>Todo</h2>
+          <ul>
+            {todos.map(item => {
+              return (
+                <>
+                  {!item.completed ? (
+                    <TodoItem
+                      key={item.id}
+                      item={item}
+                      handleComplete={handleComplete}
+                      handleRemove={handleRemove}
+                    />
+                  ) : null}
+                </>
+              )
+            })}
+          </ul>
+          <h2>Done</h2>
+          <ul>
+            {todos.map(item => {
+              return (
+                <>
+                  {item.completed ? (
+                    <TodoItemCompl
+                      key={item.id}
+                      item={item}
+                      handleComplete={handleComplete}
+                      handleRemove={handleRemove}
+                    />
+                  ) : null}
+                </>
+              )
+            })}
+          </ul>
+        </TodoContainer>
       </Container>
     </>
   )

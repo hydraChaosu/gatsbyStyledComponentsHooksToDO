@@ -3,7 +3,7 @@ import React from "react"
 const TodoListCompl = ({ item, handleRemove, handleComplete }) => {
   return (
     <li key={item.id}>
-      {item.title}
+      <p>{item.title}</p>
 
       <button id={item.id} onClick={handleComplete}>
         ucomplete todo
