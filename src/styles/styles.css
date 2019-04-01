@@ -21,6 +21,10 @@ h2 {
   margin: 10px 0;
 }
 
+/* ul {
+  background-color: rgba(0, 0, 0, 0.3);
+} */
+
 li {
   display: flex;
   align-items: center;
@@ -34,6 +38,11 @@ button {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
+
+/* .addTodoContainer {
+  align-self: left;
+} */
+
 .addTodoContainer button {
   display: block;
   margin: 10px auto;
@@ -71,7 +80,8 @@ button:hover {
 
   .todoContainer li p {
     flex-grow: 1;
-    padding: 10px;
+    /* padding: 10px; */
+    text-align: center;
   }
 
   .todoContainer .inTodoItem {
