@@ -4,14 +4,15 @@ const TodoItem = ({ item, handleComplete, handleRemove }) => {
   return (
     <li key={item.id}>
       <p>{item.title}</p>
+      <div className="inTodoItem">
+        <button id={item.id} onClick={handleComplete}>
+          complete todo
+        </button>
 
-      <button id={item.id} onClick={handleComplete}>
-        complete todo
-      </button>
-
-      <button id={item.id} onClick={handleRemove}>
-        remove todo
-      </button>
+        <button id={item.id} onClick={handleRemove}>
+          remove todo
+        </button>
+      </div>
     </li>
   )
 }

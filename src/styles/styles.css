@@ -49,5 +49,39 @@ button {
 }
 
 .todoContainer button {
+  min-width: 160px;
   margin-left: 10px;
+}
+
+button {
+  transition: 0.4s all;
+}
+
+button:hover {
+  background-color: #000;
+  color: white;
+}
+
+@media (max-width: 800px) {
+  .todoContainer li {
+    /* margin-left: 10px; */
+    display: flex;
+    /* flex-direction: column; */
+  }
+
+  .todoContainer li p {
+    flex-grow: 1;
+    padding: 10px;
+  }
+
+  .todoContainer .inTodoItem {
+    display: flex;
+    flex-direction: column;
+  }
+  ul {
+    margin: 0 10px;
+  }
+  ul:last-of-type {
+    margin-bottom: 10px;
+  }
 }

@@ -89,7 +89,7 @@ export default () => {
           <AddTodo handleSubmit={handleSubmit} text={text} setText={setText} />
         </AddTodoContainer>
         <TodoContainer className="todoContainer">
-          <h2>Todo</h2>
+          {todos.some(item => item.completed == false) && <h2>Todo</h2>}
           <ul>
             {todos.map(item => {
               return (
@@ -106,7 +106,7 @@ export default () => {
               )
             })}
           </ul>
-          <h2>Done</h2>
+          {todos.some(item => item.completed == true) && <h2>Done</h2>}
           <ul>
             {todos.map(item => {
               return (
