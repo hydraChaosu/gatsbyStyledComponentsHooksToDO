@@ -2,16 +2,12 @@ import React from "react"
 
 const TodoItem = ({ item, handleComplete, handleRemove }) => {
   return (
-    <li key={item.id}>
+    <li>
       <p>{item.title}</p>
       <div className="inTodoItem">
-        <button id={item.id} onClick={handleComplete}>
-          complete todo
-        </button>
+        <button onClick={() => handleComplete(item.id)}>complete todo</button>
 
-        <button id={item.id} onClick={handleRemove}>
-          remove todo
-        </button>
+        <button onClick={() => handleRemove(item.id)}>remove todo</button>
       </div>
     </li>
   )

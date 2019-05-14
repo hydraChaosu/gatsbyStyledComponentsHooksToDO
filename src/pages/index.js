@@ -52,17 +52,16 @@ export default () => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    if (text === "") return
     setId(id + 1)
     setTodos([...todos, { userId: id, id: id, title: text, completed: false }])
     setText("")
   }
 
-  const handleComplete = e => {
-    e.preventDefault()
-    const value = e.target.id
+  const handleComplete = id => {
     const TodoCopy = [...todos]
     const result = TodoCopy.filter(item => {
-      if (item.id == value) {
+      if (item.id === id) {
         item.completed = !item.completed
       }
       return item
@@ -70,12 +69,11 @@ export default () => {
     setTodos(result)
   }
 
-  const handleRemove = e => {
-    e.preventDefault()
-    const value = e.target.id
+  const handleRemove = id => {
     const TodoCopy = [...todos]
+    // eslint-disable-next-line
     const result = TodoCopy.filter(item => {
-      if (item.id != value) {
+      if (item.id !== id) {
         return item
       }
     })
@@ -89,7 +87,7 @@ export default () => {
           <AddTodo handleSubmit={handleSubmit} text={text} setText={setText} />
         </AddTodoContainer>
         <TodoContainer className="todoContainer">
-          {todos.some(item => item.completed == false) && <h2>Todo</h2>}
+          {todos.some(item => item.completed === false) && <h2>Todo</h2>}
           <ul>
             {todos.map(item => {
               return (
@@ -106,7 +104,7 @@ export default () => {
               )
             })}
           </ul>
-          {todos.some(item => item.completed == true) && <h2>Done</h2>}
+          {todos.some(item => item.completed === true) && <h2>Done</h2>}
           <ul>
             {todos.map(item => {
               return (
